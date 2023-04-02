@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "npm init //To create the package.json file",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/vivekkhudaniya/Backend/issues"
   },
-  "homepage": "https://github.com/vivekkhudaniya/Backend#readme"
+  "homepage": "https://github.com/vivekkhudaniya/Backend#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }

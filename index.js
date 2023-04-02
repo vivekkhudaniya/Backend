@@ -1,11 +1,20 @@
-const http = require("http");
+import http from "http";
+// import gfName from "./feature.js"
+// import { gfName2 } from "./feature.js";
+// import * as myObj from "./feature.js";
+import {generateRandomNumber}  from "./feature.js";
+import fs from "fs";
+
+console.log(generateRandomNumber());
+
+const home = fs.readFileSync("./index.html");
 
 const server = http.createServer((req,res)=> {
     if(req.url == "/about"){
-        res.end("<h1> about page <h1>")
+        res.end(`<h1> Love is ${generateRandomNumber()} <h1>`)
     }
     else if(req.url == "/"){
-        res.end("<h1> Home page <h1>")
+        res.end(`${home}`)
     }
     else if (req.url == "/contact"){
         res.end("<h1> Contract page <h1>")
