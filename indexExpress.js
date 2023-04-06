@@ -5,25 +5,31 @@ const app = express();
 
 const users = [];
 //using middleware
-app.use(express.static(path.join(path.resolve(),"public")));
+//app.use(express.static(path.join(path.resolve(),"public")));
 app.use(express.urlencoded({extended : true}));
 
 app.set("view engine","ejs");
 
 
 app.get("/",(req,res)=>{
-    res.render("index",{name : "Vivek"});
+    res.render("index.ejs",{name : "Vivek"});
 });
 
 app.get("/success", (req,res) =>{
-    res.render("success");
+    res.render("success.ejs");
 });
 
-app.post("/",(req,res) =>{
+app.post("/contact",(req,res) =>{
     console.log(req.body);
     users.push({username : req.body.name , email : req.body.email});
     res.redirect("/success");
 });
+
+app.get("/users",(req,res) =>{
+    res.json({
+        users,
+    });
+})
 
 // app.get("/getProducts",(req,res)=>{
 //     //res.sendStatus(400) It helps to send the status
