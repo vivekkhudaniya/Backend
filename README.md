@@ -20,3 +20,9 @@ Changes in package.json for scripts
 npm start 
 //For nodemon 
 npm run dev
+
+//Install mongodb compass
+//If incase not running check that mongo server is running 
+
+Connect with mongodb with node
+//mongoose

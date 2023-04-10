@@ -1,5 +1,13 @@
 import express from "express";
 import path from "path";
+import mongoose from "mongoose";
+const router = express.Router();
+
+
+mongoose.connect("mongodb://127.0.0.1:27017",{
+    dbName : "backend",
+}).then(() => console.log("database connected"))
+.catch((e) => console.log(e));
 
 const app = express();
 
@@ -10,14 +18,17 @@ app.use(express.urlencoded({extended : true}));
 
 app.set("view engine","ejs");
 
-
-app.get("/",(req,res)=>{
-    res.render("index.ejs",{name : "Vivek"});
-});
-
-app.get("/success", (req,res) =>{
-    res.render("success.ejs");
-});
+// app.get("/",(req,res)=>{
+//     res.render("./index.ejs",{name : "Vivek"});
+// });
+router.get('/', function(req, res) {
+    res.render('index');
+  });
+  
+app.get('/add', (req, res) => {
+    const myString = 'Hello World';
+    res.send(myString);
+  });
 
 app.post("/contact",(req,res) =>{
     console.log(req.body);
