@@ -14,7 +14,7 @@ npm install express
 
 Changes in package.json for scripts 
 "start": "node index.js",
-"dev": "nodemon index.js"
+"dev": "nodemon indexExpress.js"
 
 //Now we can start node using and server will start
 npm start 
