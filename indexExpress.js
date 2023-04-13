@@ -8,6 +8,12 @@ mongoose.connect("mongodb://127.0.0.1:27017",{
 }).then(() => console.log("database connected"))
 .catch((e) => console.log(e));
 
+const messageSchema = new mongoose.Schema({
+    name:String,
+    email:String
+});
+
+const Message = mongoose.model("Message",messageSchema);
 
 const users = [];
 //using middleware
@@ -19,6 +25,12 @@ app.set("view engine","ejs");
 app.get("/",(req,res)=>{
     res.render("index",{name : "Vivek"});
 });
+
+app.get("/add",(req,res) =>{
+    
+    Message.create({name:"vivek",email:"vivekkhudaniya"})
+    res.send("Nice")
+})
 
 app.get("/success", (req,res) =>{
     res.render("success");
