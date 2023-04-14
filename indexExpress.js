@@ -4,16 +4,16 @@ import mongoose from "mongoose";
 const app = express();
 
 mongoose.connect("mongodb://127.0.0.1:27017",{
-    dbName : "backend",
+    dbName : "Backend",
 }).then(() => console.log("database connected"))
 .catch((e) => console.log(e));
 
 const messageSchema = new mongoose.Schema({
-    name:String,
-    email:String
+    username:String,
+    email:String,
 });
 
-const Message = mongoose.model("Message",messageSchema);
+const Messge = mongoose.model("Message",messageSchema);
 
 const users = [];
 //using middleware
@@ -26,19 +26,27 @@ app.get("/",(req,res)=>{
     res.render("index",{name : "Vivek"});
 });
 
-app.get("/add",(req,res) =>{
+app.get("/add",async(req,res) =>{
     
-    Message.create({name:"vivek",email:"vivekkhudaniya"})
-    res.send("Nice")
+    await Messge.create({name:"vivek2",email:"vivekkhudan2iya"}).then(()=>{
+        res.send("Nice");
+    });
+    //res.send("Nice");
 })
 
 app.get("/success", (req,res) =>{
     res.render("success");
 });
 
+// app.post("/",(req,res) =>{
+//     console.log(req.body);
+//     users.push({username : req.body.name , email : req.body.email});
+//     res.redirect("/success");
+// });
+
 app.post("/",(req,res) =>{
     console.log(req.body);
-    users.push({username : req.body.name , email : req.body.email});
+   Messge.create({username:req.body.name , email : req.body.name});
     res.redirect("/success");
 });
 
