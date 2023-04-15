@@ -1,6 +1,9 @@
 import express from "express";
 import path from "path";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
+
+
 const app = express();
 
 mongoose.connect("mongodb://127.0.0.1:27017",{
@@ -17,7 +20,10 @@ const Messge = mongoose.model("Message",messageSchema);
 
 const users = [];
 //using middleware
+//app.use(express.static(path.join(path.resolve(), "public")));
 app.use(express.urlencoded({extended : true}));
+app.use(cookieParser());
+
 
 app.set("view engine","ejs");
 
@@ -38,6 +44,20 @@ app.get("/success", (req,res) =>{
     res.render("success");
 });
 
+app.get("/checkpost",(req,res) =>{
+    console.log(req.cookies);
+
+    res.render("login");
+})
+
+app.post("/login",(req,res)=>{
+    req.cookies("token","iamin",{
+        httpOnly:true,
+        expires: new Date(Date.now() + 60 * 1000),
+    });
+    res.redirect("/");
+})
+
 // app.post("/",(req,res) =>{
 //     console.log(req.body);
 //     users.push({username : req.body.name , email : req.body.email});
@@ -46,7 +66,8 @@ app.get("/success", (req,res) =>{
 
 app.post("/",(req,res) =>{
     console.log(req.body);
-   Messge.create({username:req.body.name , email : req.body.name});
+    const{name,email} = req.body;
+   Messge.create({username:username, email : email});
     res.redirect("/success");
 });
 

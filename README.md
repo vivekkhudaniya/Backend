@@ -23,6 +23,12 @@ npm run dev
 
 //Install mongodb compass
 //If incase not running check that mongo server is running 
-
+sudo mongod --dbpath /data/db
 Connect with mongodb with node
 //mongoose
+
+Connection and how to push code in mongo
+
+Authentication 
+
+
